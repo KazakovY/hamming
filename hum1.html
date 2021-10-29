@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Haming code</title>
+		<script>
+			function code(){
+				let message = document.getElementById('inputData').value;
+				let inputDigits = message.split('');
+				for (let i = 0; i < inputDigits.length; i++){
+					inputDigits[i] = inputDigits[i] * 1;
+				}
+				inputDigits.push((inputDigits[0] + inputDigits[1] + inputDigits[3]) % 2);
+				inputDigits.push((inputDigits[0] + inputDigits[2] + inputDigits[3]) % 2);
+				inputDigits.push((inputDigits[1] + inputDigits[2] + inputDigits[3]) % 2);
+				document.getElementById('codedData').value = inputDigits.join('');
+			}
+			function decode(){
+				let message2 = document.getElementById('codedData').value;
+				let output = message2.split('');
+				for (let i = 0; i < output.length; i++){
+					output[i] = output[i] * 1;
+				}
+				if ((output[0] + output[1] + output[3]) % 2 == output[4]  
+                        && (output[0] + output[2] + output[3]) % 2 == output[5]  
+                        && (output[1] + output[2] + output[3]) % 2 == output[6] ){
+                    alert("errors not found")
+					}
+				else{
+					if ((output[0] + output[1] + output[3]) % 2 == output[4] 
+                            && (output[0] + output[2] + output[3]) % 2 != output[5]
+                            && (output[1] + output[2] + output[3]) % 2 != output[6]){
+						output[2] = 1 - output[2];
+                        alert("error element 3")
+					}
+					else if ((output[0] + output[1] + output[3]) % 2 == output[4]
+                            && (output[0] + output[2] + output[3]) % 2 == output[5]  
+                            && (output[1] + output[2] + output[3]) % 2 != output[6]){
+						output[6] = 1 - output[6];
+                        alert("error element 7")
+					}
+					else if ((output[0] + output[1] + output[3]) % 2 == output[4]  
+                            && (output[0] + output[2] + output[3]) % 2 != output[5] 
+                            && (output[1] + output[2] + output[3]) % 2 == output[6] ){
+						output[5] = 1 - output[5];
+                        alert("error element 6");
+						}
+					else if ((output[0] + output[1] + output[3]) % 2 != output[4] 
+                            && (output[0] + output[2] + output[3]) % 2 == output[5]  
+                            && (output[1] + output[2] + output[3]) % 2 == output[6]){
+						output[4] = 1 - output[4];
+                        alert("error element 4");
+						}
+					else if ((output[0] + output[1] + output[3]) % 2 != output[4] 
+                            && (output[0] + output[2] + output[3]) % 2 != output[5]  
+                            && (output[1] + output[2] + output[3]) % 2 == output[6]){
+						output[0] = 1 - output[0];
+                        alert("error element 1");
+						}
+					else if ((output[0] + output[1] + output[3]) % 2 != output[4] 
+                            && (output[0] + output[2] + output[3]) % 2 == output[5]  
+                            && (output[1] + output[2] + output[3]) % 2 != output[6]){
+						output[1] = 1 - output[1];
+                        alert("error element 2");
+						}
+					else if ((output[0] + output[1] + output[3]) % 2 != output[4] 
+                        && (output[0] + output[2] + output[3]) % 2 != output[5] 
+                        && (output[1] + output[2] + output[3]) % 2 != output[6] ){
+						    output[3] = 1- output[3];
+                            alert("error element 3");
+						}
+					}
+			document.getElementById('decodedData').value = output.join('');
+			}
+		</script>
+	<head>
+	<body>
+		<p> <input type = 'text' id = 'inputData'/> input data</p>
+		<p> <input type = 'button' onclick = 'code()' value = 'Code'/></p>
+		<p> <input type = 'text' id = 'codedData'/> coded data</p>
+		<p> <input type = 'button' onclick = 'decode()' value = 'Decode'/></p>
+		<p> <input type = 'text' id = 'decodedData'/> decoded data</p>
+	</body>
+</html>
